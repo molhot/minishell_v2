@@ -12,29 +12,6 @@
 
 #include "../minishell.h"
 
-void	split_tokenword(t_token **token, t_token **re_token)
-{
-	char	**tokenwd_split;
-	size_t	position;
-
-	tokenwd_split = ft_split((*token)->word, ' ');
-	position = 0;
-	while (tokenwd_split[position] != NULL)
-	{
-		(*re_token)->word = ft_strdup(tokenwd_split[position]);
-		(*re_token)->kind = TK_WORD;
-		if (tokenwd_split[position + 1] != NULL)
-		{
-			(*re_token)->next = (t_token *)malloc(sizeof(t_token) * 1);
-			*re_token = (*re_token)->next;
-		}
-		free(tokenwd_split[position]);
-		position++;
-	}
-	free(tokenwd_split);
-	(*token) = (*token)->next;
-}
-
 void	expand_quote(t_token *token)
 {
 	while (token != NULL)

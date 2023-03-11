@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/03/12 04:27:04 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/12 04:48:31 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,10 +187,7 @@ t_redirect	*expand_redirect_ten(t_redirect *redirect);
 void		append_single(char **args, char **new);
 void		append_double(char **args, char **new);
 bool		word_blankcheck(char *string);
-void		re_token_in_null(t_token **token, t_token **re_token);
-void		re_token_make(t_token **retoken, t_token *token);
 void		remake_token(t_token *token, t_token *re_token);
-void		split_tokenword(t_token **token, t_token **re_token);
 void		expand_export(t_token *token);
 void		export_argsremake(t_token *token);
 void		quote_append_indoller(char type, char **new_wd, char **args);
@@ -236,6 +233,7 @@ bool		is_word(const char *s);
 bool		ft_isspace(char c);
 bool		consume_blank(char **rest, char *line);
 bool		startswith(const char *s, const char *keyword);
+bool		word_blankcheck(char *string);
 
 /**************** utils ****************/
 
