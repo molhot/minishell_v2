@@ -1,0 +1,301 @@
+       word   A sequence of characters considered as a single unit by the shell.  Also known as a token.
+       name   A word consisting only of alphanumeric characters and underscores, and beginning with an alphabetic character or  an  underscore.
+              A character that, when unquoted, separates words.  One of the following:
+       Reserved words are words that have a special meaning to the shell.  The following words are recognized as reserved when unquoted and ei‐
+       ther the first word of a command (see SHELL GRAMMAR below), the third word of a case or select command (only in is valid), or the  third
+       word of a for command (only in and do are valid):
+       A  simple command is a sequence of optional variable assignments followed by blank-separated words and redirections, and terminated by a
+       control operator.  The first word specifies the command to be executed, and is passed as argument zero.  The remaining words are  passed
+       successfully.  If the reserved word !  precedes a pipeline, the exit status of that pipeline is the logical negation of the exit  status
+       If  the  time reserved word precedes a pipeline, the elapsed as well as user and system time consumed by its execution are reported when
+       not  recognize  time as a reserved word if the next token begins with a `-'.  The TIMEFORMAT variable may be set to a format string that
+              served words and must occur where a reserved word is permitted to be recognized.  Since they do not cause a word break, they must
+              primaries  described  below  under CONDITIONAL EXPRESSIONS.  Word splitting and pathname expansion are not performed on the words
+       for name [ [ in [ word ... ] ] ; ] do list ; done
+              The list of words following in is expanded, generating a list of items.  The variable name is set to each element of this list in
+              turn,  and list is executed each time.  If the in word is omitted, the for command executes list once for each positional parame‐
+       select name [ in word ] ; do list ; done
+              The list of words following in is expanded, generating a list of items.  The set of expanded words is printed on the standard er‐
+              ror, each preceded by a number.  If the in word is omitted, the positional parameters are printed (see  PARAMETERS  below).   The
+              the displayed words, then the value of name is set to that word.  If the line is empty, the words and prompt are displayed again.
+       case word in [ [(] pattern [ | pattern ] ... ) list ;; ] ... esac
+              A  case  command first expands word, and tries to match it against each pattern in turn, using the matching rules described under
+              Pattern Matching below.  The word is expanded using tilde expansion, parameter and variable expansion, arithmetic expansion, com‐
+       A  coprocess  is  a shell command preceded by the coproc reserved word.  A coprocess is executed asynchronously in a subshell, as if the
+       simple  command  (see above); otherwise, it is interpreted as the first word of the simple command.  When the coprocess is executed, the
+       arguments to shell commands and redirections using standard word expansions.  Other than those created to execute  command  and  process
+              This defines a function named fname.  The reserved word function is optional.  If the function reserved  word  is  supplied,  the
+              ception:  If the function reserved word is used, but the parentheses are not supplied, the braces are required.  compound-command
+              and  may  not  be the name of one of the POSIX special builtins.  In default mode, a function name can be any unquoted shell word
+       BUILTIN COMMANDS below), a word beginning with # causes that word and all remaining characters on that line to be ignored.  An  interac‐
+       Quoting is used to remove the special meaning of certain characters or words to the shell.  Quoting  can  be  used  to  disable  special
+       treatment for special characters, to prevent reserved words from being recognized as such, and to prevent parameter expansion.
+       Words  of the form $'string' are treated specially.  The word expands to string, with backslash-escaped characters replaced as specified
+       whose  name was passed as $1.  If the control variable in a for loop has the nameref attribute, the list of words can be a list of shell
+       variables, and a name reference will be established for each word in the list, in turn, when the loop is executed.  Array variables can‐
+              ter  expands  to a separate word.  In contexts where it is performed, those words are subject to further word splitting and path‐
+              name expansion.  When the expansion occurs within double quotes, it expands to a single word with the  value  of  each  parameter
+       @      Expands  to the positional parameters, starting from one.  In contexts where word splitting is performed, this expands each posi‐
+              tional parameter to a separate word; if not within double quotes, these words are subject to word splitting.  In  contexts  where
+              word splitting is not performed, this expands to a single word with each positional parameter separated by a space.  When the ex‐
+              pansion occurs within double quotes, each parameter expands to a separate word.  That is, "$@" is equivalent to "$1" "$2" ...  If
+              the  double-quoted  expansion occurs within a word, the expansion of the first parameter is joined with the beginning part of the
+              original word, and the expansion of the last parameter is joined with the last part of the original word.  When there are no  po‐
+              A colon-separated list of enabled shell options.  Each word in the list is a valid argument  for  the  -s  option  to  the  shopt
+              An  index  into ${COMP_WORDS} of the word containing the current cursor position.  This variable is available only in shell func‐
+              for normal completion, ?, for listing completions after successive tabs, !, for listing alternatives on partial word  completion,
+              @,  to list completions if the word is not unmodified, or %, for menu completion.  This variable is available only in shell func‐
+              The set of characters that the readline library treats as word separators when performing word completion.  If COMP_WORDBREAKS is
+              An  array  variable  (see  Arrays  below) consisting of the individual words in the current command line.  The line is split into
+              words as readline would split it, using COMP_WORDBREAKS as described above.  This variable is available only in  shell  functions
+              A colon-separated list of enabled shell options.  Each word in the list is a valid argument for the -o option to the set  builtin
+       IFS    The  Internal Field Separator that is used for word splitting after expansion and to split lines into words with the read builtin
+              reserved  word  should be displayed.  The % character introduces an escape sequence that is expanded to a time value or other in‐
+              This  variable  controls how the shell interacts with the user and job control.  If this variable is set, single word simple com‐
+              the remainder of the line is a comment when found as the first character of a word, normally `#'.  The history comment  character
+              causes history substitution to be skipped for the remaining words on the line.  It does not necessarily cause the shell parser to
+       When assigning to an associative array, the words in a compound assignment may be either assignment statements, for which the  subscript
+       is  required,  or a list of words that is interpreted as a sequence of alternating keys and values: name=( key1 value1 key2 value2 ...).
+       These are treated identically to name=( [key1]=value1 [key2]=value2 ...).  The first word in the list determines how the remaining words
+       If subscript is @ or *, the word expands to all members of name.  These subscripts differ only  when  the  word  appears  within  double
+       quotes.   If  the  word is double-quoted, ${name[*]} expands to a single word with the value of each array member separated by the first
+       character of the IFS special variable, and ${name[@]} expands each element of name to a separate word.  When there are no array members,
+       ${name[@]} expands to nothing.  If the double-quoted expansion occurs within a word, the expansion of the first parameter is joined with
+       the beginning part of the original word, and the expansion of the last parameter is joined with the last  part  of  the  original  word.
+       When using a variable name with a subscript as an argument to a command, such as with unset, without using the word expansion syntax de‐
+       array.  If both options are supplied, -A takes precedence.  The read builtin accepts a -a option to assign a list of words read from the
+       Expansion  is performed on the command line after it has been split into words.  There are seven kinds of expansion performed: brace ex‐
+       pansion, tilde expansion, parameter and variable expansion, command substitution, arithmetic expansion, word splitting, and pathname ex‐
+       stitution (done in a left-to-right fashion); word splitting; and pathname expansion.
+       After  these expansions are performed, quote characters present in the original word are removed unless they have been quoted themselves
+       Only brace expansion, word splitting, and pathname expansion can increase the number of words of the expansion; other expansions  expand
+       a  single  word  to  a single word.  The only exceptions to this are the expansions of "$@" and "${name[@]}", and, in most cases, $* and
+       cially when they appear as part of a word, and preserves them in the output.  Bash removes braces from words as a consequence  of  brace
+       expansion.   For  example,  a word entered to sh as file{1,2} appears identically in the output.  The same word is output as file1 file2
+       If a word begins with an unquoted tilde character (`~'), all of the characters preceding the first unquoted slash (or all characters, if
+       If the login name is invalid, or the tilde expansion fails, the word is unchanged.
+       Bash also performs tilde expansion on words satisfying the conditions of variable assignments (as described above under PARAMETERS) when
+       In each of the cases below, word is subject to tilde expansion, parameter expansion, command substitution, and arithmetic expansion.
+       ${parameter:-word}
+              Use  Default  Values.  If parameter is unset or null, the expansion of word is substituted.  Otherwise, the value of parameter is
+       ${parameter:=word}
+              Assign Default Values.  If parameter is unset or null, the expansion of word is assigned to parameter.  The value of parameter is
+       ${parameter:?word}
+              Display Error if Null or Unset.  If parameter is null or unset, the expansion of word (or a message to that effect if word is not
+       ${parameter:+word}
+              Use Alternate Value.  If parameter is null or unset, nothing is substituted, otherwise the expansion of word is substituted.
+              word.
+              key expands to a separate word.
+       ${parameter#word}
+       ${parameter##word}
+              Remove matching prefix pattern.  The word is expanded to produce a pattern just as in pathname expansion, and matched against the
+       ${parameter%word}
+       ${parameter%%word}
+              Remove matching suffix pattern.  The word is expanded to produce a pattern just as in pathname expansion, and matched against the
+              The result of the expansion is subject to word splitting and pathname expansion as described below.
+       put  of  the command, with any trailing newlines deleted.  Embedded newlines are not deleted, but they may be removed during word split‐
+       If the substitution appears within double quotes, word splitting and pathname expansion are not performed on the results.
+       quotes for word splitting.
+       The shell treats each character of IFS as a delimiter, and splits the results of the other expansions into words using these  characters
+       the  beginning  or  end serves to delimit words.  If IFS has a value other than the default, then sequences of the whitespace characters
+       space, tab, and newline are ignored at the beginning and end of the word, as long as the whitespace character is in the value of IFS (an
+       a field.  A sequence of IFS whitespace characters is also treated as a delimiter.  If the value of IFS is null, no  word  splitting  oc‐
+       null argument results and is retained and passed to a command as an empty string.  When a quoted null argument appears as part of a word
+       whose expansion is non-null, the null argument is removed.  That is, the word -d'' becomes -d after word splitting and null argument re‐
+       After  word  splitting, unless the -f option has been set, bash scans each word for the characters *, ?, and [.  If one of these charac‐
+       ters appears, and is not quoted, then the word is regarded as a pattern, and replaced with an alphabetically sorted  list  of  filenames
+       the word is left unchanged.  If the nullglob option is set, and no matches are found, the word is removed.  If the failglob shell option
+                     alnum alpha ascii blank cntrl digit graph lower print punct space upper word xdigit
+                     A  character  class  matches any character belonging to that class.  The word character class matches letters, digits, and
+       Each redirection that may be preceded by a file descriptor number may instead be preceded by a word of  the  form  {varname}.   In  this
+       The  word  following  the  redirection  operator in the following descriptions, unless otherwise noted, is subjected to brace expansion,
+       word splitting.  If it expands to more than one word, bash reports an error.
+       Redirection of input causes the file whose name results from the expansion of word to be opened for reading on file descriptor n, or the
+              [n]<word
+       Redirection of output causes the file whose name results from the expansion of word to be opened for writing on file  descriptor  n,  or
+              [n]>word
+       whose name results from the expansion of word exists and is a regular file.  If the redirection operator is >|, or the redirection oper‐
+       word exists.
+       Redirection  of  output in this fashion causes the file whose name results from the expansion of word to be opened for appending on file
+              [n]>>word
+       the file whose name is the expansion of word.
+              &>word
+              >&word
+              >word 2>&1
+       When  using  the second form, word may not expand to a number or -.  If it does, other redirection operators apply (see Duplicating File
+       the file whose name is the expansion of word.
+              &>>word
+              >>word 2>&1
+              [n]<<[-]word
+       No  parameter  and  variable  expansion, command substitution, arithmetic expansion, or pathname expansion is performed on word.  If any
+       part of word is quoted, the delimiter is the result of quote removal on word, and the lines in the here-document are not  expanded.   If
+       word  is  unquoted, all lines of the here-document are subjected to parameter expansion, command substitution, and arithmetic expansion,
+              [n]<<<word
+       The  word  undergoes  tilde  expansion, parameter and variable expansion, command substitution, arithmetic expansion, and quote removal.
+       Pathname expansion and word splitting are not performed.  The result is supplied as a single string, with a  newline  appended,  to  the
+              [n]<&word
+       is  used  to  duplicate input file descriptors.  If word expands to one or more digits, the file descriptor denoted by n is made to be a
+       copy of that file descriptor.  If the digits in word do not specify a file descriptor open for input, a redirection  error  occurs.   If
+       word evaluates to -, file descriptor n is closed.  If n is not specified, the standard input (file descriptor 0) is used.
+              [n]>&word
+       digits in word do not specify a file descriptor open for output, a redirection error occurs.  If word evaluates to -, file descriptor  n
+       is  closed.   As  a special case, if n is omitted, and word does not expand to one or more digits or -, the standard output and standard
+              [n]<>word
+       causes  the file whose name is the expansion of word to be opened for both reading and writing on file descriptor n, or on file descrip‐
+       Aliases allow a string to be substituted for a word when it is used as the first word of a simple command.  The shell maintains  a  list
+       of  aliases that may be set and unset with the alias and unalias builtin commands (see SHELL BUILTIN COMMANDS below).  The first word of
+       each simple command, if unquoted, is checked to see if it has an alias.  If so, that word is replaced by the text  of  the  alias.   The
+       replacement text may contain any valid shell input, including shell metacharacters.  The first word of the replacement  text  is  tested
+       for aliases, but a word that is identical to an alias being expanded is not expanded a second time.  This means that one may alias ls to
+       blank, then the next command word following the alias is also checked for alias expansion.
+       1.     The  words  that  the parser has marked as variable assignments (those preceding the command name) and redirections are saved for
+       2.     The words that are not variable assignments or redirections are expanded.  If any words remain after expansion, the first word is
+              taken to be the name of the command and the remaining words are the arguments.
+       After  a  command  has been split into words, if it results in a simple command and an optional list of arguments, the following actions
+       command substitution or contain characters special to word expansion.
+              Meta-Rubout: backward-kill-word
+       In the above example, C-u is bound to the function universal-argument, M-DEL is bound to the function  backward-kill-word,  and  C-o  is
+              If  set  to  On, readline will inhibit word completion.  Completion characters will be inserted into the line as if they had been
+              If set to On, tilde expansion is performed when readline attempts word completion.
+              This  alters  the default behavior of the completion functions.  If set to On, words which have more than one possible completion
+              This alters the default behavior of the completion functions in a fashion similar to show-all-if-ambiguous.  If set to On,  words
+              performing completion in the middle of a word.  If enabled, readline does not insert characters from the  completion  that  match
+              characters after point in the word being completed, so portions of the word following the cursor are not duplicated.
+                     minal's  function  keys.  The word on the right side of the = is tested against both the full name of the terminal and the
+                     the current or previous word in bash:
+                     # Quote the current or previous word
+       forward-word (M-f)
+              Move forward to the end of the next word.  Words are composed of alphanumeric characters (letters and digits).
+       backward-word (M-b)
+              Move back to the start of the current or previous word.  Words are composed of alphanumeric characters (letters and digits).
+       shell-forward-word
+              Move forward to the end of the next word.  Words are delimited by non-quoted shell metacharacters.
+       shell-backward-word
+              Move back to the start of the current or previous word.  Words are delimited by non-quoted shell metacharacters.
+              Insert the first argument to the previous command (usually the second word on the previous line) at point.  With an  argument  n,
+              insert the nth word from the previous command (the words in the previous command begin with word 0).  A negative argument inserts
+              the nth word from the end of the previous command.  Once the argument n is computed, the argument is extracted  as  if  the  "!n"
+              Insert  the last argument to the previous command (the last word of the previous history entry).  With a numeric argument, behave
+              exactly like yank-nth-arg.  Successive calls to yank-last-arg move back through the history list, inserting the last word (or the
+              word  specified by the argument to the first call) of each line in turn.  Any numeric argument supplied to these successive calls
+              forward).   The  history expansion facilities are used to extract the last word, as if the "!$" history expansion had been speci‐
+              Expand the line as the shell does.  This performs alias and history expansion as well as all of the shell word  expansions.   See
+       transpose-words (M-t)
+              Drag the word before point past the word after point, moving point over that word as well.  If point is at the end of  the  line,
+              this transposes the last two words on the line.
+       upcase-word (M-u)
+              Uppercase the current (or following) word.  With a negative argument, uppercase the previous word, but do not move point.
+       downcase-word (M-l)
+              Lowercase the current (or following) word.  With a negative argument, lowercase the previous word, but do not move point.
+       capitalize-word (M-c)
+              Capitalize the current (or following) word.  With a negative argument, capitalize the previous word, but do not move point.
+       kill-word (M-d)
+              Kill  from  point to the end of the current word, or if between words, to the end of the next word.  Word boundaries are the same
+              as those used by forward-word.
+       backward-kill-word (M-Rubout)
+              Kill the word behind point.  Word boundaries are the same as those used by backward-word.
+       shell-kill-word
+              Kill from point to the end of the current word, or if between words, to the end of the next word.  Word boundaries are  the  same
+              as those used by shell-forward-word.
+       shell-backward-kill-word
+              Kill the word behind point.  Word boundaries are the same as those used by shell-backward-word.
+       unix-word-rubout (C-w)
+              Kill the word behind point, using white space as a word boundary.  The killed text is saved on the kill-ring.
+              Kill  the  word  behind point, using white space and the slash character as the word boundaries.  The killed text is saved on the
+       copy-backward-word
+              Copy the word before point to the kill buffer.  The word boundaries are the same as backward-word.
+       copy-forward-word
+              Copy the word following point to the kill buffer.  The word boundaries are the same as forward-word.
+              Similar  to  complete, but replaces the word to be completed with a single match from the list of possible completions.  Repeated
+              against aliases, reserved words, shell functions, shell builtins, and finally executable filenames, in that order.
+              Perform tilde expansion on the current word.
+       glob-complete-word (M-g)
+              The word before point is treated as a pattern for pathname expansion, with an asterisk implicitly appended.  This pattern is used
+       glob-expand-word (C-x *)
+              The  word  before point is treated as a pattern for pathname expansion, and the list of matching filenames is inserted, replacing
+              the word.  If a numeric argument is supplied, an asterisk is appended before pathname expansion.
+              The list of expansions that would have been generated by glob-expand-word is displayed, and the line is redrawn.   If  a  numeric
+       When word completion is attempted for an argument to a command for which a completion specification (a compspec) has been defined  using
+       First,  the  command  name  is  identified.   If the command word is the empty string (completion attempted at the beginning of an empty
+       used  to  generate the list of possible completions for the word.  If the command word is a full pathname, a compspec for the full path‐
+       the default.  If there is no default compspec, bash attempts alias expansion on the command word as a final resort, and attempts to find
+       a compspec for the command word from any successful expansion.
+       Once a compspec has been found, it is used to generate the list of matching words.  If a compspec is not found, the default bash comple‐
+       First, the actions specified by the compspec are used.  Only matches which are prefixed by the word being completed are returned.   When
+       Any  completions specified by a pathname expansion pattern to the -G option are generated next.  The words generated by the pattern need
+       not match the word being completed.  The GLOBIGNORE shell variable is not used to filter the matches, but the FIGNORE variable is used.
+       special variable as delimiters.  Shell quoting is honored.  Each word is then expanded using brace expansion, tilde expansion, parameter
+       the  rules  described above under Word Splitting.  The results of the expansion are prefix-matched against the word being completed, and
+       the matching words become the possible completions.
+       word being completed, and the third argument ($3) is the word preceding the word being completed on the current command line.   No  fil‐
+       tering  of the generated completions against the word being completed is performed; the function or command has complete freedom in gen‐
+       pattern  as  used  for pathname expansion; a & in the pattern is replaced with the text of the word being completed.  A literal & may be
+       History  expansions introduce words from the history list into the input stream, making it easy to repeat commands, insert the arguments
+       History expansion is performed immediately after a complete line is read, before the shell breaks it into words,  and  is  performed  on
+       rent  one.  The line selected from the history is the event, and the portions of that line that are acted upon are words.  Various modi‐
+       fiers are available to manipulate the selected words.  The line is broken into words in the same fashion as when reading input, so  that
+       several metacharacter-separated words surrounded by quotes are considered one word.  History expansions are introduced by the appearance
+       Word  designators  are used to select desired words from the event.  A : separates the event specification from the word designator.  It
+       may be omitted if the word designator begins with a ^, $, *, -, or %.  Words are numbered from the beginning of the line, with the first
+       word being denoted by 0 (zero).  Words are inserted into the current line separated by single spaces.
+              The zeroth word.  For the shell, this is the command word.
+       n      The nth word.
+       ^      The first argument.  That is, word 1.
+       $      The last word.  This is usually the last argument, but will expand to the zeroth word if there is only one word in the line.
+       %      The first word matched by the most recent `?string?' search, if the search string begins with a character that is part of a word.
+       x-y    A range of words; `-y' abbreviates `0-y'.
+       *      All  of  the  words  but  the zeroth.  This is a synonym for `1-$'.  It is not an error to use * if there is just one word in the
+       x-     Abbreviates x-$ like x*, but omits the last word.  If x is missing, it defaults to 0.
+       If a word designator is supplied without an event specification, the previous command is used as the event.
+       After the optional word designator, there may appear a sequence of one or more of the following  modifiers,  each  preceded  by  a  `:'.
+       These modify, or edit, the word or words selected from the history event.
+       q      Quote the substituted words, escaping further substitutions.
+       x      Quote  the  substituted  words as with q, but break into words at blanks and newlines.  The q and x modifiers are mutually exclu‐
+       G      Apply the following `s' or `&' modifier once to each word in the event line.
+              arguments are supplied, an alias is defined for each name whose value is given.  A trailing space in value causes the  next  word
+              causes a single word indicating the command or filename used to invoke command to be displayed; the -V  option  produces  a  more
+       compgen [option] [word]
+              Generate  possible completion matches for word according to the options, which may be any option accepted by the complete builtin
+              tion specification with the same flags.  If word is specified, only those completions matching word will be displayed.
+       complete [-abcdefgjksuv] [-o comp-option] [-DEI] [-A action] [-G globpat] [-W wordlist]
+              and actions should apply to completion on the initial non-assignment word on the line, or after a command delimiter such as ;  or
+              The  process  of applying these completion specifications when word completion is attempted is described above under Programmable
+                      noquote Tell readline not to quote the completed words if they are filenames (quoting filenames is the default).
+                      nospace Tell readline not to append a space (the default) to words completed at the end of the line.
+                      keyword Shell reserved words.  May also be specified as -k.
+                      ment ($1) is the name of the command whose arguments are being completed, the second argument ($2) is the word being com‐
+                      pleted,  and the third argument ($3) is the word preceding the word being completed on the current command line.  When it
+              -W wordlist
+                      The wordlist is split using the characters in the IFS special variable as delimiters, and  each  resultant  word  is  ex‐
+                      panded.   Shell  quoting  is  honored  within  wordlist,  in  order to provide a mechanism for the words to contain shell
+                      match the word being completed.
+              signment word on the line, or after a command delimiter such as ; or |, which is usually command name completion.
+       export [-fn] [name[=word]] ...
+              =word, the value of the variable is set to word.  export returns an exit status of 0 unless an invalid option is encountered, one
+              words  as  described  above under Word Splitting, and the first word is assigned to the first name, the second word to the second
+              name, and so on.  If there are more words than names, the remaining words and their intervening delimiters are  assigned  to  the
+              last  name.   If there are fewer words read from the input stream than names, the remaining names are assigned empty values.  The
+              characters in IFS are used to split the line into words using the same rules the shell uses for expansion (described above  under
+                     The words are assigned to sequential indices of the array variable aname, starting at 0.  aname is unset  before  any  new
+       readonly [-aAf] [-p] [name[=word] ...]
+              reused  as input.  If a variable name is followed by =word, the value of the variable is set to word.  The return status is 0 un‐
+                      list  immediately  following  a while or until keyword, part of the test following the if or elif reserved words, part of
+                      keyword Same as -k.
+                      expanded value of PS4, followed by the command and its expanded arguments or associated word list.
+                      when these metacharacters appear in shell variable references in words to be completed.  This means that dollar signs  in
+                      If  set,  bash  replaces  directory  names  with the results of word expansion when performing filename completion.  This
+                      If set, bash attempts spelling correction on directory names during word completion if the directory name initially  sup‐
+                      If  set,  the  suffixes specified by the FIGNORE shell variable cause words to be ignored when performing word completion
+                      even if the ignored words are the only possible completions.  See SHELL VARIABLES above for  a  description  of  FIGNORE.
+                      If set, and readline is being used, bash will attempt to perform hostname completion when a word containing a @ is  being
+                      If set, allow a word beginning with # to cause that word and all remaining characters on that line to be  ignored  in  an
+                      tional  commands, when performing pattern substitution word expansions, or when filtering possible completions as part of
+                      ble  alias and attempts alias expansion. If it has an alias, bash attempts programmable completion using the command word
+              command  is part of the command list immediately following a while or until keyword, part of the test in an if statement, part of
+              string which is one of alias, keyword, function, builtin, or file if name is an alias, shell reserved word, function, builtin, or
+       the regexp matching operator quotes special regexp characters in the word, which is default behavior in bash-3.2 and above).
+              •      in  posix  mode,  time may be followed by options and still be recognized as a reserved word (this is POSIX interpretation
+              •      in posix mode, the parser requires that an even number of single quotes occur in the word portion of a  double-quoted  pa‐
+              •      in posix mode, single quotes are considered special when expanding the word portion of a double-quoted parameter expansion
+                     versions, single quotes are not special within double-quoted word expansions
+              •      word expansion errors are considered non-fatal errors that cause the current command to fail, even in posix mode (the  de‐
