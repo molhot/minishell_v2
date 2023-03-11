@@ -4,7 +4,7 @@ SRCS	=	tokenizer/tokenizer.c tokenizer/create_token.c\
 			syntax_check/syntax_check.c syntax_check/tokencheck.c syntax_check/tokencheck_quote.c\
 			parser/parser.c parser/parse_word.c parser/parse_redirect.c parser/parser_utils.c\
 			expand/expand.c expand/expand_doller.c expand/expand_appendchar.c expand/expand_specialchar.c expand/export_expand.c expand/expand_utils.c\
-			expand/expand_simplecommand.c expand/expand_redirection.c expand/remake_token.c expand/quote_manage.c expand/doller_manage.c\
+			expand/expand_simplecommand.c expand/expand_redirection.c expand/remake_token.c expand/quote_manage.c expand/doller_manage.c expand/expand_specialparam.c\
 			exec_func/exec_func.c exec_func/exec_builtin.c exec_func/pipe_func.c exec_func/redirect_file.c expand/expand_swaitch_doller.c\
 			exec_func/exec_absolutepath.c exec_func/exec_utils.c exec_func/stashfd_helper.c exec_func/builtin_exec.c\
 			word_rolechecker/is_blank.c word_rolechecker/is_metacharacter.c word_rolechecker/is_space.c word_rolechecker/consume_blank.c word_rolechecker/word_blankcheck.c\

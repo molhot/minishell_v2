@@ -12,16 +12,6 @@
 
 #include "../minishell.h"
 
-void	expand_quote(t_token *token)
-{
-	while (token != NULL)
-	{
-		if (token->word != NULL)
-			token->word = expand_args_quote(token->word, token->word);
-		token = token->next;
-	}
-}
-
 void	switch_quote_doller(char **args, char **newword)
 {
 	char	*tmp;
@@ -65,16 +55,12 @@ char	*expand_args_quote(char *args, char *args_free)
 	return (new_word);
 }
 
-void	expand_specialparam(t_token *token)
+void	expand_quote(t_token *token)
 {
-	char	*tmp;
-
 	while (token != NULL)
 	{
-		tmp = ft_strdup(token->word);
-		free(token->word);
-		token->word = expand_args_doller(tmp);
-		free(tmp);
+		if (token->word != NULL)
+			token->word = expand_args_quote(token->word, token->word);
 		token = token->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/03/12 04:48:31 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/12 04:59:21 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,6 @@ void		expand_specialparam(t_token *token);
 void		remake_token(t_token *token, t_token *re_token);
 void		expand_quote(t_token *token);
 char		*expand_args_quote(char *args, char *args_free);
-char		*expand_args_doller(char *args);
 t_redirect	*expand_redirect_ten(t_redirect *redirect);
 void		append_single(char **args, char **new);
 void		append_double(char **args, char **new);
