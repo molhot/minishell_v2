@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 01:03:13 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/10 21:48:53 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/12 04:34:27 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,7 @@ void	append_double(char **args, char **new)
 	while (**args != '\"')
 	{
 		if (**args == '\\' && slush_char_ch(*(*args + 1)) == true)
-		{
-			(*args)++;
-			append_char(&(*new), **args);
-			(*args)++;
-		}
+			b_slush_append(&(*args), &(*new));
 		else if (**args == '$' && *(*args + 1) != '\"')
 			expand_doller_dq(&(*new), &(*args), *args);
 		else

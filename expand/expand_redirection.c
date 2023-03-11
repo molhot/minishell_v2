@@ -24,31 +24,6 @@ void	quote_append(char **args, char **new_word)
 		append_double(&(*args), &(*new_word));
 }
 
-char	*expand_args_redirect(char *args, char *args_free)
-{
-	char	*new_word;
-
-	new_word = NULL;
-	while (*args != '\0')
-	{
-		if (*args == '\\')
-		{
-			args++;
-			append_char(&new_word, *args++);
-		}
-		if ((*args == '\'' || *args == '\"') && *(args + 1) != '\0')
-			quote_append(&args, &new_word);
-		else if (*args == '$' && *(args + 1) == '?')
-			expand_dolleeques(&new_word, &args, args);
-		else if (*args == '$')
-			expand_doller(&new_word, &args, args);
-		else
-			append_char(&new_word, *args++);
-	}
-	free(args_free);
-	return (new_word);
-}
-
 void	check_doller(char **rest, char *p, t_redirect *redirect)
 {
 	char	*name;
@@ -101,4 +76,26 @@ void	specialparam_check(t_redirect *redirect)
 		}
 		redirect = redirect->next;
 	}
+}
+
+char	*expand_args_redirect(char *args, char *args_free)
+{
+	char	*new_word;
+
+	new_word = NULL;
+	while (*args != '\0')
+	{
+		if (*args == '\\')
+			b_slush_append(&args, &new_word);
+		if ((*args == '\'' || *args == '\"') && *(args + 1) != '\0')
+			quote_append(&args, &new_word);
+		else if (*args == '$' && *(args + 1) == '?')
+			expand_dolleeques(&new_word, &args, args);
+		else if (*args == '$')
+			expand_doller(&new_word, &args, args);
+		else
+			append_char(&new_word, *args++);
+	}
+	free(args_free);
+	return (new_word);
 }
