@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	switch_quote_doller(char **args, char **newword)
+static void	switch_quote_doller(char **args, char **newword)
 {
 	char	*tmp;
 
@@ -29,7 +29,7 @@ void	switch_quote_doller(char **args, char **newword)
 		expand_doller(&(*newword), &(*args), tmp);
 }
 
-char	*expand_args_quote(char *args, char *args_free)
+static char	*expand_args_quote(char *args, char *args_free)
 {
 	char	*new_word;
 
