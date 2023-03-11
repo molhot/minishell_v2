@@ -35,20 +35,6 @@ void	split_tokenword(t_token **token, t_token **re_token)
 	(*token) = (*token)->next;
 }
 
-void	expand_specialparam(t_token *token)
-{
-	char	*tmp;
-
-	while (token != NULL)
-	{
-		tmp = ft_strdup(token->word);
-		free(token->word);
-		token->word = expand_args_doller(tmp);
-		free(tmp);
-		token = token->next;
-	}
-}
-
 void	expand_quote(t_token *token)
 {
 	while (token != NULL)
@@ -100,4 +86,18 @@ char	*expand_args_quote(char *args, char *args_free)
 	}
 	free(args_free);
 	return (new_word);
+}
+
+void	expand_specialparam(t_token *token)
+{
+	char	*tmp;
+
+	while (token != NULL)
+	{
+		tmp = ft_strdup(token->word);
+		free(token->word);
+		token->word = expand_args_doller(tmp);
+		free(tmp);
+		token = token->next;
+	}
 }
