@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/03/12 03:46:25 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/12 04:27:04 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,8 @@ char		*expand_args_expote(char *args, char *args_free);
 void		switch_doller(char **new_word, char **args);
 void		check_inquote(char type, char **args);
 void		b_slush_append(char **args, char **new_wd);
+char		*expand_args_redirect(char *args, char *args_free);
+void		specialparam_check(t_redirect *redirect);
 
 /************* signal handler ************/
 

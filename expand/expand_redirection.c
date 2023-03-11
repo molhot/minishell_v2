@@ -102,19 +102,3 @@ void	specialparam_check(t_redirect *redirect)
 		redirect = redirect->next;
 	}
 }
-
-t_redirect	*expand_redirect_ten(t_redirect *redirect)
-{
-	t_redirect	*f_redirect;
-
-	f_redirect = redirect;
-	specialparam_check(redirect);
-	while (redirect != NULL)
-	{
-		if (redirect->ambigous == false)
-			redirect->file_path = \
-			expand_args_redirect(redirect->file_path, redirect->file_path);
-		redirect = redirect->next;
-	}
-	return (f_redirect);
-}

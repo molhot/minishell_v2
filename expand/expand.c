@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/12 04:21:19 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/12 04:25:04 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@ void	expand_export(t_token *token)
 			token->word = expand_args_expote(token->word, token->word);
 		token = token->next;
 	}
+}
+
+t_redirect	*expand_redirect_ten(t_redirect *redirect)
+{
+	t_redirect	*f_redirect;
+
+	f_redirect = redirect;
+	specialparam_check(redirect);
+	while (redirect != NULL)
+	{
+		if (redirect->ambigous == false)
+			redirect->file_path = \
+			expand_args_redirect(redirect->file_path, redirect->file_path);
+		redirect = redirect->next;
+	}
+	return (f_redirect);
 }
 
 t_token	*expand_simplecommand(t_token *token)
