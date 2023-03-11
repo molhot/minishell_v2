@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:28:10 by user              #+#    #+#             */
-/*   Updated: 2023/03/11 00:29:58 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/12 03:46:25 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,10 +193,12 @@ void		remake_token(t_token *token, t_token *re_token);
 void		split_tokenword(t_token **token, t_token **re_token);
 void		expand_export(t_token *token);
 void		export_argsremake(t_token *token);
-void		quote_append_indoller(char type, char **new, char **args);
+void		quote_append_indoller(char type, char **new_wd, char **args);
 void		switch_doller_inexpandquote(char **new_word, char **args);
 char		*expand_args_expote(char *args, char *args_free);
 void		switch_doller(char **new_word, char **args);
+void		check_inquote(char type, char **args);
+void		b_slush_append(char **args, char **new_wd);
 
 /************* signal handler ************/
 

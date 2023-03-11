@@ -48,8 +48,6 @@ void	re_token_make(t_token **retoken, t_token *token)
 
 static	bool	check_tokenwdblank(char *string)
 {
-	char	type;
-
 	while (is_blank(*string))
 		string++;
 	while (*string != '\0')
@@ -59,17 +57,7 @@ static	bool	check_tokenwdblank(char *string)
 		if (*string == '\\')
 			string = string + 2;
 		else if ((*string == '\'' || *string == '\"') && *(string + 1) != '\0')
-		{
-			type = *string;
-			string++;
-			while (*string != type)
-			{
-				if (*string == '\\')
-					string++;
-				string++;
-			}
-			string++;
-		}
+			check_inquote(*string, &string);
 		else
 			string++;
 	}

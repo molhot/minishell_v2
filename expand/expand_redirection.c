@@ -79,7 +79,6 @@ void	check_doller(char **rest, char *p, t_redirect *redirect)
 void	specialparam_check(t_redirect *redirect)
 {
 	char	*args;
-	char	type;
 
 	while (redirect != NULL)
 	{
@@ -89,16 +88,11 @@ void	specialparam_check(t_redirect *redirect)
 			if (*args == '\\')
 				args = args + 2;
 			else if (*args == '\'' || *args == '\"')
-			{
-				type = *args;
-				args++;
-				while (*args != type)
-					args++;
-				args++;
-			}
+				check_inquote(*args, &args);
 			else if (*args == '$' && *(args + 1) == '?')
 				args = args + 2;
-			else if (*args == '$' && ((*(args + 1) == '\'') || (*(args + 1) == '\"')))
+			else if (*args == '$' && \
+			((*(args + 1) == '\'') || (*(args + 1) == '\"')))
 				args++;
 			else if (*args == '$')
 				check_doller(&args, args, redirect);
