@@ -6,7 +6,7 @@
 /*   By: mochitteiunon? <sakata19991214@gmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 00:37:31 by satushi           #+#    #+#             */
-/*   Updated: 2023/03/12 04:12:02 by mochitteiun      ###   ########.fr       */
+/*   Updated: 2023/03/12 04:21:19 by mochitteiun      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,10 @@ t_token	*expand_simplecommand(t_token *token)
 {
 	t_token	*re_token;
 	t_token	*f_re_tok;
-	bool	export_is;
 
 	re_token = (t_token *)malloc(sizeof(t_token) * 1);
 	f_re_tok = re_token;
-	export_is = false;
-	if (ft_strcmp(token->word, "export") == 0)
-		export_is = true;
-	(void)export_is;
-	if (export_is == false)
+	if (ft_strcmp(token->word, "export") != 0)
 	{
 		expand_specialparam(token);
 		remake_token(token, re_token);
